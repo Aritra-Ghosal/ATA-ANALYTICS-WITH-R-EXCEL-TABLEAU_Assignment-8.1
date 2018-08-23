@@ -1,0 +1,48 @@
+> library(RcmdrPlugin.IPSUR)
+> library(TeachingDemos)
+> library(Hmisc)
+> 
+> data("RcmdrTestDrive")
+> names(RcmdrTestDrive)
+[1] "order"     "smoking"   "gender"    "race"      "before"    "after"     "salary"   
+[8] "reduction" "parking"  
+> 
+> #1.a
+> #salary by gender
+> by(salary,gender,mean,na.rm=TRUE)
+gender: Female
+[1] 698.0911
+-------------------------------------------------------------------- 
+gender: Male
+[1] 743.3915
+> #salary by smoking status
+> by(salary,smoking,mean,na.rm=TRUE)
+smoking: Nonsmoker
+[1] 719.3792
+-------------------------------------------------------------------- 
+smoking: Smoker
+[1] 746.3494
+> 
+> #1.b
+> #Gender having highest mean salary
+> y<-by(salary,gender,mean,na.rm=TRUE)
+> y[which(y==max(y))]
+    Male 
+743.3915 
+> 
+> #1.c
+> #mean salary by gender and smoking status asiigned into varribles
+> x <-c(by(salary,gender,mean,na.rm=TRUE), by(salary,smoking,mean,na.rm=TRUE))
+> #max salary with salary in gender and smoker variation
+> x[which(x==max(x))]
+  Smoker 
+746.3494 
+> 
+> #1.d
+> #Comparing the spreads for the genders by calculating the standard deviation of salary by gender.
+> y<-tapply(salary,list(gender=gender),sd)
+> y
+gender
+  Female     Male 
+130.7053 158.5423 
+>
